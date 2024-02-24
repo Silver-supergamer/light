@@ -1,4 +1,3 @@
-let lights_enabled = false
 input.onButtonPressed(Button.A, function () {
     lights_enabled = !(lights_enabled)
     if (lights_enabled) {
@@ -108,5 +107,13 @@ input.onButtonPressed(Button.AB, function () {
         `)
 })
 input.onGesture(Gesture.Shake, function () {
-    music.play(music.stringPlayable("C5 B A G F E D C ", 120), music.PlaybackMode.UntilDone)
+    if (input.compassHeading() >= 180) {
+        direction = ArrowNames.North
+    } else {
+        direction = ArrowNames.South
+    }
+    basic.showArrow(direction)
 })
+let lights_enabled = false
+let direction: ArrowNames
+input.calibrateCompass()
